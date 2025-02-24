@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForEnvi - Consultoria Florestal</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <!--<img src="/rasters/ForEnvi4_logo.png" alt="Logo da Forenvi">-->
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Início</a></li>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="#gis">Visualizador GIS</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1>Soluções sustentáveis para um futuro melhor!</h1>
+        <a href="#servicos" class="btn">Saiba Mais</a>
+    </div>
+</section>
+
+<!-- Sobre Nós -->
+<section id="sobre" class="about">
+    <div class="about-content">
+        <div class="about-text">
+            <h2>Sobre a ForEnvi</h2>
+            <p>A ForEnvi é uma empresa especializada em consultoria florestal, oferecendo soluções inovadoras para gestão sustentável dos recursos naturais.</p>
+            <p>Com uma equipe altamente qualificada, ajudamos empresas e proprietários florestais a otimizar a gestão florestal, garantindo conformidade ambiental e eficiência produtiva.</p>
+        </div>
+        <div class="about-image">
+            <img src="./rasters/radiata.jpg" alt="Trabalho da ForEnvi">
+        </div>
+    </div>
+</section>
+
+<!-- Nossos Serviços -->
+<section id="servicos" class="services">
+    <h2>Nossos Serviços</h2>
+    <p>Oferecemos soluções especializadas para a gestão e sustentabilidade florestal.</p>
+
+    <div class="services-grid">
+        <div class="service-item">
+            <i class="fas fa-certificate"></i>
+            <h3>Certificação Florestal</h3>
+            <p>Garantimos conformidade com os principais padrões ambientais e sustentáveis.</p>
+        </div>
+
+        <div class="service-item">
+            <i class="fas fa-tree"></i>
+            <h3>Projetos Florestais</h3>
+            <p>Desenvolvemos projetos personalizados para manejo e recuperação de florestas.</p>
+        </div>
+
+        <div class="service-item">
+            <i class="fas fa-lightbulb"></i>
+            <h3>Consultoria Florestal</h3>
+            <p>Oferecemos suporte técnico especializado para otimizar recursos florestais.</p>
+        </div>
+
+        <div class="service-item">
+            <i class="fas fa-chart-line"></i>
+            <h3>Gestão Florestal</h3>
+            <p>Soluções estratégicas para maximizar produtividade e sustentabilidade.</p>
+        </div>
+    </div>
+
+    <div class="contact-call">
+        <h3>Entre em contato conosco para mais informações!</h3>
+        <a href="#contato" class="btn">Fale Conosco</a>
+    </div>
+</section>
+
+<section id="gis">
+    <h2>Visualizador GIS</h2>
+    <div id="map"></div>
+</section>
+
+<section id="contato">
+    <h2>Contato</h2>
+    <p>Email: geral@forenvi.com</p>
+</section>
+
+<footer>
+    <p>&copy; 2025 ForEnvi.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<script src="https://unpkg.com/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

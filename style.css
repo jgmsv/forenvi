@@ -1,0 +1,503 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Corpo da página */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Faz o corpo ocupar toda a tela */
+}
+
+/* Container principal para manter o footer no fim */
+main {
+    flex: 1; /* Faz com que o conteúdo principal ocupe o espaço disponível */
+}
+
+/* Navbar fixa no topo */
+/* Melhorando a Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #00695c, #004d40);
+    color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.logo span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Links de navegação */
+.nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.nav-links li {
+    margin: 0 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.3s ease-in-out, transform 0.2s;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.nav-links a:hover {
+    color: #ffcc00;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Estilização geral de seções */
+section {
+    margin-bottom: 20px;
+    padding: 80px 20px 20px; /* Espaçamento extra para evitar sobreposição com a navbar fixa */
+}
+
+/*HOME SECTION*/
+/* Hero Section */
+.hero {
+    background: url(./rasters/ForEnvi4_logo.png) no-repeat center center/cover;
+    min-height: 80vh; /* Mantém a secção sempre visível */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    padding: 20px;
+    padding-top: 100px; /* Garante que a navbar não cobre o conteúdo */
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero-content {
+    position: relative;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn {
+    display: inline-block;
+    background: #00a86b;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn:hover {
+    background: #008f5b;
+    transform: scale(1.05);
+}
+
+/* Destaques */
+.highlights {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    padding: 50px 20px;
+    background: #f9f9f9;
+}
+
+.highlight {
+    max-width: 300px;
+}
+
+.highlight i {
+    font-size: 2.5rem;
+    color: #00a86b;
+    margin-bottom: 10px;
+}
+
+.highlight h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.highlight p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Seção Sobre Nós */
+.about {
+    background: #f4f4f4;
+    padding: 80px 20px;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: auto;
+    gap: 40px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    color: #004d40;
+    margin-bottom: 15px;
+}
+
+.about-text p {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.about-image {
+    flex: 1;
+}
+
+.about-image img {
+    width: 100%;
+    max-width: 450px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Serviços */
+.services {
+    text-align: center;
+    padding: 80px 20px;
+    background: #f9f9f9;
+}
+
+.services h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #004d40;
+}
+
+.services p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Layout da grade de serviços */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Estilização dos blocos de serviços */
+.service-item {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.service-item i {
+    font-size: 3rem;
+    color: #00a86b;
+    margin-bottom: 15px;
+}
+
+.service-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #004d40;
+}
+
+.service-item p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Estilização do mapa */
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+
+
+/* Input de arquivo */
+input[type="file"] {
+    margin-top: 10px;
+}
+
+/* Estilização do Leaflet Draw Toolbar */
+.leaflet-draw-toolbar {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Estilo para os botões na barra de controle */
+.leaflet-bar {
+    display: flex;
+    flex-direction: column; /* Alinha os botões verticalmente */
+    justify-content: flex-start; /* Garante que os botões fiquem no topo */
+}
+
+/* Estilo para os botões na barra de controle */
+.leaflet-bar .leaflet-control-button {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    line-height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin: 2px 0; /* Adiciona um pequeno espaço entre os botões */
+}
+
+.leaflet-bar .leaflet-control-button:hover {
+    background-color: #f4f4f4;
+}
+
+/* Estilo do botão de upload KML */
+#uploadKMLButton {
+    font-size: 16px;
+}
+
+/* Estilo do botão de download KML */
+#downloadKML {
+    font-size: 16px;
+}
+
+/* Estilo do botão de enviar KML */
+#sendKML {
+    font-size: 16px;
+}
+
+/* Ajuste do tamanho dos pontos de edição no Leaflet Draw */
+.leaflet-marker-icon.leaflet-editing-icon {
+    width: 8px !important; 
+    height: 8px !important; 
+    margin-left: -4px; 
+    margin-top: -4px; 
+    background-color: #3388ff; 
+    border-radius: 50%; 
+    border: 1px solid #ffffff; 
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: auto;
+    width: 100%;
+    background-color: #004d40
+}
+
+/* Ajuste do espaçamento para o conteúdo não ficar escondido atrás da navbar */
+section {
+    margin-bottom: 20px;
+    padding: 80px 20px 20px;
+}
+
+.contact-call {
+    text-align: center;
+    margin-top: 50px; /* Adiciona mais espaço superior */
+    padding: 40px 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-call h3 {
+    font-size: 1.8rem;
+    color: #004d40;
+    margin-bottom: 20px; /* Adiciona espaço abaixo do texto */
+}
+
+.contact-call .btn {
+    display: inline-block;
+    background: #00a86b;
+    color: white;
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.contact-call .btn:hover {
+    background: #008f5b;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: rgba(0, 77, 64, 0.95);
+        width: 200px;
+        padding: 20px;
+        border-radius: 0 0 10px 10px;
+    }
+
+    .nav-links li {
+        margin-bottom: 10px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+    
+    .btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .about-image img {
+        max-width: 100%;
+    }
+}
+
+/* Seção Serviços */
+.services {
+    text-align: center;
+    padding: 80px 20px;
+    background: #fff;
+}
+
+.services h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #004d40;
+}
+
+.services p {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 40px;
+}
+
+/* Layout de grade para serviços */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+    gap: 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.service-item {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.service-item i {
+    font-size: 3rem;
+    color: #00a86b;
+    margin-bottom: 15px;
+}
+
+.service-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #004d40;
+}
+
+.service-item p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr; /* Fica em uma coluna no mobile */
+    }
+}
