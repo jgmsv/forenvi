@@ -200,3 +200,15 @@ document.getElementById('sendKML').addEventListener('click', async function () {
 
     alert(`Arquivo KML "${fileName}.kml" enviado para o Dropbox com sucesso!`);
 });
+
+// Adicionando o controle de localização
+L.control.locate({
+    position: 'topleft',
+    drawCircle: true,
+    setView: true,
+    flyTo: true,
+    icon: 'fa fa-location-arrow',
+    iconLoading: 'fa fa-circle-notch fa-spin',
+    metric: false,
+    strings: { title: "Mostrar minha localização", popup: "Você está aqui!" }
+}).addTo(map);
