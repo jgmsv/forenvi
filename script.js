@@ -1,3 +1,13 @@
+//Navbar burguer
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+    });
+});
+
 // Adicionando a biblioteca Omnivore
 var script = document.createElement('script');
 script.src = "https://unpkg.com/leaflet-omnivore@0.3.4/leaflet-omnivore.min.js";
@@ -58,7 +68,6 @@ map.on(L.Draw.Event.CREATED, function (e) {
 // Controles de upload e download de KML
 var kmlControl = L.control({ position: 'topleft' });
 
-var kmlControl = L.control({ position: 'topleft' });
 
 kmlControl.onAdd = function () {
     var div = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
@@ -67,7 +76,6 @@ kmlControl.onAdd = function () {
         <input type="file" id="uploadKML" accept=".kml" style="display:none;" />
         <button id="uploadKMLButton" title="Upload KML">📂</button>
         <button id="downloadKML" title="Download KML">⬇️</button>
-        <button id="sendKML" title="Enviar KML para a ForEnvi">📧</button>
     `;
 
     // Definir comportamento dos botões
@@ -111,10 +119,11 @@ function convertToKML(layerGroup) {
     <kml xmlns="http://www.opengis.net/kml/2.2">
     <Document>`;
 
-    layerGroup.eachLayer(layer => {
+    // Iterando sobre as camadas desenhadas
+    layerGroup.eachLayer(function(layer) {
+        // Se for um Polígono
         if (layer instanceof L.Polygon) {
             var coords = layer.getLatLngs()[0].map(latlng => `${latlng.lng},${latlng.lat},0`).join(" ");
-
             kml += `<Placemark>
                 <Polygon>
                     <outerBoundaryIs>
@@ -125,13 +134,26 @@ function convertToKML(layerGroup) {
                 </Polygon>
             </Placemark>`;
         }
+
+        // Se for um Ponto (Marker)
+        if (layer instanceof L.Marker) {
+            var latlng = layer.getLatLng();
+            // Depuração: Verificando o que está sendo capturado
+            console.log("Coordenadas do marcador:", latlng);  // Isso deve funcionar agora
+
+            kml += `<Placemark>
+                <Point>
+                    <coordinates>${latlng.lng},${latlng.lat},0</coordinates>
+                </Point>
+            </Placemark>`;
+        }
     });
 
     kml += `</Document></kml>`;
     return kml;
 }
 
-// Botão para baixar KML
+// Função para download do KML
 document.getElementById('downloadKML').addEventListener('click', function () {
     if (drawnItems.getLayers().length === 0) {
         alert("Não há formas desenhadas para exportar.");
@@ -141,7 +163,15 @@ document.getElementById('downloadKML').addEventListener('click', function () {
     var fileName = prompt("Digite o nome do arquivo para download:", "meu_mapa");
     if (!fileName) return;
 
+    // Gerar o KML a partir das camadas desenhadas
     var kmlData = convertToKML(drawnItems);
+
+    // Verifique se o KML não está vazio
+    if (!kmlData || kmlData.trim() === "") {
+        alert("Erro: o arquivo KML está vazio.");
+        return;
+    }
+
     var blob = new Blob([kmlData], { type: 'application/vnd.google-earth.kml+xml' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -151,55 +181,7 @@ document.getElementById('downloadKML').addEventListener('click', function () {
     document.body.removeChild(a);
 });
 
-// Função para fazer upload do KML para o Dropbox
-async function uploadKMLToDropbox(kmlContent, fileName) {
-    const fileBlob = new Blob([kmlContent], { type: "application/vnd.google-earth.kml+xml" });
 
-    const response = await fetch("https://content.dropboxapi.com/2/files/upload", {
-        method: "POST",
-        headers: {
-            "Authorization": "Bearer sl.u.AFiAeY3Tc0rFcm-bGYAdudB_43yuFvmUeK3Ha7icw7mf5EHP-NO8T5JXXqSWkziu6-j9tZ7rfnES5EiJ0tg4ouzwzipZlDK7xwzoaZiYinzWB6OWJZzbDAzYsfrcfnNFg019Rn2Mr_oLh3kvHvNAA7ODwEcR4RKVrUyT8tiUd10Kt8E5_bzCnThfzmXscb0nW_tJHvtXo-bd7pI8VqPpgvvdZ9vOgLuvaWy0AoqN3yEahsytTyvT0p__md68IEzSWB9gwEUTH1JCbniY7YnlqVG9unF0aAyNLuNAWvxjfSAyY9R9pqFf26Os4Wm8wBZrJ4LyQlHJJFaXaICiH1Xfcro1Uwrp4rzCE1GJtVcnyNzVCTgJkXIezNVgxAUp1CFU4Rw4Oc-j9xcvpT8A-LAB_VC8fOgtCSR7_Rfx8qaa5GYzxJ1F_YBcHNzy8-0pRMD2F36nYHqSdNHP9qLR2PqsqTio7MaY6vwbeLmEa_wNAqS_pgFDLWv4shPG3T3fxxQs8fkSWOoSLZRw6NeJI769Pfi4PgCZoNcQW9osOd_U07PZW1-d_wqSGYzuP9t_cdcekmkr50UASjCXkC32KDPmbyuKK1e4pR949VEXt9wRxxdGwTJzitZnQPAq3MWh3VhjU7Q0a68JqoIo2m_1yR7OPyXr3nii2QSwRwlrFcLaP18H4EXyIgmcYRFH8BRD3Tcj2lbnbwhltrAg_RZF7YKc8szwdh6Vy7Hl95jocwkKTTvHcpIHblswn7ASlDrwbfHCv5gN5vDn2MU3hYFs3hclBY4aRBDm7sZxOkv3zQUXRG8Uh1Uvgx8PovzsWaQhTgFW4HuqrdXM5g9uAygGsYyWDVAE-W30_ua7haplU2483QJEhRJzcf_Q8Gs_deOAB1TWzia3gF4WSPTEfvT90SOTAomtg6C12mvbxmeMN7sMf2gXI0lYNAMYZNiL6LgjwIQWcff-PpRQPOQvOvcrxOHjwOq9qVdgVUO1NWgglXbUAfAKgfgH82GF7_gnJ_alwKkTdXIWlk9MroT3X6tN5bXh1AaR_KIWuPqawgiToAVu_THgzIrJHNn5sgIMM8ZoEUeflyIDyxbRPL5MzTss1j1fWET7aAhQcqfTd6eRC6ilpimMZ1S6SRH8AjjypnnxCE-bF127vGOOb5818c-KVMHagR2tIIq1Jz_C-If4mujATSR6pdlSnmSjBVO7F-PxGc5c8t4i0Wu0N0EWgGhS-MoQAPq0Y_Bd1bV_JBCS4fHuwaIGwaunmY7h0uepNgBRLglL_iOZI7lewqhzDUWUdm3IXveDQxQesQc0S7Yb0cCyCjiwIFS1UZjxcRgH0rEuWjNPWL3e1SWZxcnG3u_W0l44H1GSg3WRokdEfqHTcxklT7f3iFJFE6FqwIlyqyJvLCDeH7Jqx7hE_vwSD16-Yuwx2jh8Gv1jfNhWpgmMIIC5lux_hRRilQ5s-Ghlom8VE9oiBQE",
-            "Content-Type": "application/octet-stream",
-            "Dropbox-API-Arg": JSON.stringify({
-                path: `/${fileName}.kml`,
-                mode: "overwrite",
-                autorename: true
-            })
-        },
-        body: fileBlob
-    });
-
-    if (!response.ok) {
-        console.error("Erro ao enviar para o Dropbox:", await response.text());
-        return null;
-    }
-
-    const data = await response.json();
-    console.log("Arquivo enviado com sucesso para o Dropbox:", data.path_display);
-    return data.path_display;
-}
-
-// Atualizando o botão de envio para salvar KML no Dropbox
-document.getElementById('sendKML').addEventListener('click', async function () {
-    if (drawnItems.getLayers().length === 0) {
-        alert("Não há formas desenhadas para enviar.");
-        return;
-    }
-
-    var fileName = prompt("Digite o nome do arquivo para enviar", "meu_mapa");
-    if (!fileName) return;
-
-    var kmlContent = convertToKML(drawnItems);
-
-    // Faz upload para Dropbox
-    const filePath = await uploadKMLToDropbox(kmlContent, fileName);
-    if (!filePath) {
-        alert("Erro ao fazer upload para o Dropbox.");
-        return;
-    }
-
-    alert(`Arquivo KML "${fileName}.kml" enviado para o Dropbox com sucesso!`);
-});
 
 // Adicionando o controle de localização
 L.control.locate({
